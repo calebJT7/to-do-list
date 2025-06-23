@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Mi App Personal</title>
+  <link rel="stylesheet" href="firstprojet.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>👋 Hola, <span id="userEmail"></span></h1>
+     <button onclick="logout()" class="logout-btn">Cerrar Sesión</button>
+
+    </header>
+
+    <section class="todo-section">
+      <h2>✅ To-Do List</h2>
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Agregar nueva tarea..." />
+        <button onclick="addTask()">Agregar</button>
+      </div>
+      <ul id="taskList"></ul>
+    </section>
+
+    <section class="notes-section">
+      <h2>📝 Notas Personales</h2>
+      <div class="input-group">
+        <textarea id="noteInput" placeholder="Escribe tu nota aquí..."></textarea>
+        <button onclick="addNote()">Agregar Nota</button>
+      </div>
+      <ul id="noteList"></ul>
+    </section>
+  </div>
+
+ <script src="firstproject.js" defer></script>
+
+</body>
+</html>
+

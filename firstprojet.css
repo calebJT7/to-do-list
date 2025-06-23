@@ -1,0 +1,113 @@
+/* Reset y base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+.container, .login-container {
+  background: rgba(11, 85, 87, 0.933);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #0008;
+  width: 100%;
+  max-width: 500px;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-container input,
+.login-container button,
+.input-group input,
+.input-group textarea,
+.input-group button {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group input[type="text"],
+.input-group textarea {
+  flex: 1;
+  resize: vertical;
+}
+
+button {
+  background: #00dfc4;
+  border: none;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 10px;
+  padding: 0 1rem;
+}
+
+button:hover {
+  background: #00bfa5;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #333;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+
+li.completed span {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+li span {
+  flex: 1;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background: #ff4c4c;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  float: right;
+  border: none;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #e60000;
+}
+
