@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Dashboard Personal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="user-info">
+        <div class="avatar" id="userAvatar">👤</div>
+        <div class="user-email" id="userEmail"></div>
+        <div class="user-stats">
+          <div class="stat">
+            <div class="stat-number" id="taskCount">0</div>
+            <div class="stat-label">Tareas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="noteCount">0</div>
+            <div class="stat-label">Notas</div>
+          </div>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a class="nav-link active" data-section="dashboard">
+              <span class="nav-icon">🏠</span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-section="tasks">
+              <span class="nav-icon">✅</span>
+              Tareas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-section="notes">
+              <span class="nav-icon">📝</span>
+              Notas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-section="pomodoro">
+              <span class="nav-icon">⏱️</span>
+              Pomodoro
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-section="calendar">
+              <span class="nav-icon">📅</span>
+              Calendario
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        🚪 Cerrar Sesión
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <div class="mobile-header">
+        <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+        <h2>Mi Dashboard</h2>
+      </div>
+
+      <!-- Dashboard Section -->
+      <section class="section" id="dashboard-section">
+        <div class="time-widget">
+          <div class="current-time" id="currentTime">00:00:00</div>
+          <div class="current-date" id="currentDate"></div>
+        </div>
+
+        <div class="weather-widget">
+          <div class="weather-temp" id="weatherTemp">--°C</div>
+          <div class="weather-desc" id="weatherDesc">Cargando clima...</div>
+        </div>
+
+        <div class="section-header">
+          <span class="section-icon">📊</span>
+          <h2 class="section-title">Resumen del Día</h2>
+        </div>
+        
+        <div class="user-stats" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+          <div class="stat">
+            <div class="stat-number" id="completedTasks">0</div>
+            <div class="stat-label">Tareas Completadas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="pendingTasks">0</div>
+            <div class="stat-label">Tareas Pendientes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="totalNotes">0</div>
+            <div class="stat-label">Notas Guardadas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="pomodoroSessions">0</div>
+            <div class="stat-label">Sesiones Pomodoro</div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Progreso de Tareas</h3>
+          <div class="progress-bar">
+            <div class="progress-fill" id="taskProgress" style="width: 0%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks Section -->
+      <section class="section hidden" id="tasks-section">
+        <div class="section-header">
+          <span class="section-icon">✅</span>
+          <h2 class="section-title">Gestión de Tareas</h2>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="taskInput" placeholder="Nueva tarea...">
+          <select id="taskPriority">
+            <option value="low">Baja</option>
+            <option value="medium">Media</option>
+            <option value="high">Alta</option>
+          </select>
+          <input type="date" id="taskDate">
+          <button class="btn btn-primary" onclick="addTask()">
+            ➕ Agregar
+          </button>
+        </div>
+
+        <ul class="item-list" id="taskList"></ul>
+        
+        <div class="empty-state" id="tasksEmpty" style="display: none;">
+          <div class="empty-state-icon">📝</div>
+          <p>No tienes tareas pendientes. ¡Agrega una nueva!</p>
+        </div>
+      </section>
+
+      <!-- Notes Section -->
+      <section class="section hidden" id="notes-section">
+        <div class="section-header">
+          <span class="section-icon">📝</span>
+          <h2 class="section-title">Notas Personales</h2>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="noteTitle" placeholder="Título de la nota...">
+        </div>
+        <div class="input-group">
+          <textarea id="noteInput" placeholder="Escribe tu nota aquí..."></textarea>
+          <button class="btn btn-primary" onclick="addNote()">
+            💾 Guardar Nota
+          </button>
+        </div>
+
+        <div id="noteList"></div>
+        
+        <div class="empty-state" id="notesEmpty" style="display: none;">
+          <div class="empty-state-icon">📄</div>
+          <p>No tienes notas guardadas. ¡Crea tu primera nota!</p>
+        </div>
+      </section>
+
+      <!-- Pomodoro Section -->
+      <section class="section hidden" id="pomodoro-section">
+        <div class="pomodoro-timer">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <div class="timer-controls">
+            <button class="timer-btn" onclick="startTimer()">▶️ Iniciar</button>
+            <button class="timer-btn" onclick="pauseTimer()">⏸️ Pausar</button>
+            <button class="timer-btn" onclick="resetTimer()">🔄 Reiniciar</button>
+          </div>
+          <div style="margin-top: 1rem;">
+            <button class="timer-btn" onclick="setTimer(25)">Trabajo (25min)</button>
+            <button class="timer-btn" onclick="setTimer(5)">Descanso (5min)</button>
+            <button class="timer-btn" onclick="setTimer(15)">Descanso Largo (15min)</button>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <span class="section-icon">📊</span>
+          <h2 class="section-title">Estadísticas de Productividad</h2>
+        </div>
+        
+        <div class="user-stats" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+          <div class="stat">
+            <div class="stat-number" id="todaySessions">0</div>
+            <div class="stat-label">Hoy</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="weekSessions">0</div>
+            <div class="stat-label">Esta Semana</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" id="monthSessions">0</div>
+            <div class="stat-label">Este Mes</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Calendar Section -->
+      <section class="section hidden" id="calendar-section">
+        <div class="section-header">
+          <span class="section-icon">📅</span>
+          <h2 class="section-title">Calendario</h2>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h3 id="calendarMonth"></h3>
+          <button class="btn btn-primary btn-small" onclick="prevMonth()">◀️</button>
+          <button class="btn btn-primary btn-small" onclick="nextMonth()">▶️</button>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
