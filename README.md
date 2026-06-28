@@ -1,6 +1,6 @@
 # Productivity Dashboard & Task Manager
 
-A comprehensive frontend productivity web application built to practice DOM manipulation, UI state management, and complex logic using Vanilla JavaScript (approx. 500 lines of code). 
+A comprehensive frontend productivity web application built to practice DOM manipulation, UI state management, and complex logic using Vanilla JavaScript. 
 
 ## Live Demo
 [View the project online](https://calebjt7.github.io/to-do-list/)
